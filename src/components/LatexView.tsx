@@ -6,16 +6,10 @@ import {
     StyleProp,
 } from 'react-native';
 
-/**
- * Error event payload from native module
- */
 interface LatexErrorEvent {
     error: string;
 }
 
-/**
- * Props for the LatexView component
- */
 export interface LatexViewProps {
     /**
      * LaTeX expression to render
@@ -58,34 +52,13 @@ export interface LatexViewProps {
     style?: StyleProp<ViewStyle>;
 }
 
-/**
- * Internal native component props
- */
 interface NativeLatexViewProps extends Omit<LatexViewProps, 'onError'> {
     onError?: (event: NativeSyntheticEvent<LatexErrorEvent>) => void;
 }
 
-/**
- * Native component reference
- */
 const NativeLatexView =
     requireNativeComponent<NativeLatexViewProps>('LatexView');
 
-/**
- * LaTeX rendering component for React Native.
- * Renders mathematical expressions using native Android rendering.
- *
- * @example
- * ```tsx
- * <LatexView
- *   latex="$x^2 + y^2 = z^2$"
- *   textSize={20}
- *   textColor="#333333"
- *   onLoad={() => console.log('Rendered!')}
- *   onError={(error) => console.error(error)}
- * />
- * ```
- */
 export const LatexView: React.FC<LatexViewProps> = ({
     latex,
     textSize = 16,
